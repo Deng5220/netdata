@@ -6,6 +6,8 @@ Scope for this pass: menus / settings / buttons / labels. **Metric names, chart 
 
 ## Still English (in-scope UI chrome)
 
+- Configurations / Collectors / Health / Jobs (node config panes) — mapped in follow-up
+- 0 selected
 - Search charts (placeholder) — added in follow-up string map
 - Latest: (chart footer label) — added in follow-up string map
 - Chart toolbar fragments: `the AVG()`, `9 of 10 dimensions`, `2 labels`, `each as`, `every 4s`, `dimension` as a free token in sentences

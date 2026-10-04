@@ -253,5 +253,11 @@
   "of": "/",
   "1 node": "1 个节点",
   "1 system": "1 个系统",
-  "CPU Idle Jitter": "CPU 空闲抖动"
+  "CPU Idle Jitter": "CPU 空闲抖动",
+  "Configurations": "配置",
+  "Collectors": "采集器",
+  "Health": "健康",
+  "Jobs": "任务",
+  "0 selected": "已选 0 项",
+  "selected": "已选"
 }
