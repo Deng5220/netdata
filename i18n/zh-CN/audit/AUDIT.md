@@ -1,31 +1,26 @@
-# Audit conclusion — Netdata zh-CN UI overlay
+# Box UI audit (2026-10-04 15:29 CST)
 
-**Verdict: conditional pass for chrome menus; do not mirror-package yet.**
+Host: this shared Linux machine, disposable Docker `netdata-zh-box` (`netdata/netdata:stable`), `127.0.0.1:19999`, overlay injected before `</body>`. Not a mirror image. Not deployed.
 
-## What was tested
+Browser cache: a broken earlier inject had been cached by the v3 service worker. After clearing site data, `http://127.0.0.1:19999/v3/index.html?audit=7c7777a` loaded the dashboard.
 
-- Repo: https://github.com/Deng5220/netdata branch `i18n/zh-CN`
-- Overlay path: `i18n/zh-CN/` (`strings.zh-CN.json`, `overlay.js`, `apply-overlay.sh`)
-- Runtime: temporary Docker Agent on shared host **Deng** (`netdata-zh-test`, port 19999), overlay copied into `/usr/share/netdata/web/i18n/zh-CN/` and injected into `index.html` / `v3/index.html` / `v3/agent.html`
-- Method: Playwright screenshots + body text dump of `/v3/` (menus, metrics chrome). Evidence under `i18n/zh-CN/audit/`.
+## Verdict
 
-## Findings
+Requested chrome is translated on this host. Do **not** package a mirror yet: the alerts page body and three configuration subtabs were still English in the screenshots. Those labels are now in `strings.zh-CN.json` and were not re-screenshotted.
 
-1. Top nav menus (节点/指标/实时/日志/仪表板/告警/事件/异常/AI 洞察) render in 简体中文.
-2. Primary actions 播放中 / 登录 / 重置 / 展开 - 对比时段 work via exact string overlay.
-3. Right metrics tree category labels largely Chinese after dictionary expansion.
-4. Gaps remain in chart chrome phrases and search placeholder; metric/chart titles intentionally untouched.
-5. `#/settings` hash alone did not open a dedicated settings sheet in this build; gear/settings deep links need another pass with explicit UI clicks.
-6. Overlay approach is fragile for concatenated English phrases (`the AVG()`, `9 of 10 dimensions`) because replacements are exact full-token matches.
+## Verified translated
 
-## Recommendation
+- Nav: 本地, 节点, 指标, 实时, 日志, 仪表板, 告警, 事件, 异常, AI 洞察, 登录, 播放中/已暂停
+- Metrics chrome: 搜索图表, 分组依据, 维度, 平均值, 1 节点, 9 / 10 维度, 2 标签, 各自为, 每 4 秒, 重置
+- Config: 配置, 采集器, 健康, 任务, 搜索, 0 已选
 
-- **Do not package a mirror image yet.**
-- Next: finish dedicated Settings panels screenshots, expand phrase-level map for chart toolbar, then re-audit.
-- Keep production untouched; current Docker test container is disposable verification only.
+## Still English in the screenshots (in scope)
 
-## Artifacts
+- Alerts: Raised, Running, New Alert, Alerts & Notifications, empty-state sentences
+- Config subtabs: SecretStores, ServiceDiscovery, Vnodes
+- Split toolbar token `the` next to 平均值, and chip `1 system` (pattern exists; node may be split)
+- Chart titles, series names, and log body: unchanged on purpose
 
-- `audit-home.png`, `audit-settings.png` (metrics view; settings route did not change page)
-- `audit-page-text.txt`
-- `UNTRANSLATED.md`
+## Evidence
+
+- `home.png`, `metrics.png`, `alerts.png`, `configs.png`, `notes.md`

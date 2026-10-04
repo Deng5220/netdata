@@ -263,5 +263,17 @@
   "AVG()": "平均值",
   "Search Charts": "搜索图表",
   "Search charts...": "搜索图表…",
-  "label": "标签"
+  "label": "标签",
+  "Raised": "已触发",
+  "Running": "运行中",
+  "Misconfigured": "配置错误",
+  "New Alert": "新建告警",
+  "Alerts & Notifications": "告警和通知",
+  "SecretStores": "密钥存储",
+  "ServiceDiscovery": "服务发现",
+  "Vnodes": "虚拟节点",
+  "This room has no active alerts, you are all good!": "此空间没有活动告警。",
+  "Visit later or check your notifications": "稍后再看，或检查通知",
+  "View raised and configured alerts across your infrastructure.": "查看基础设施中已触发和已配置的告警。",
+  "Last updated:": "上次更新："
 }
