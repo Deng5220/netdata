@@ -29,3 +29,7 @@ Install/runtime target (on a test host, not production):
 - Prefer `/v3/` local bundle for deterministic testing (Cloudflare live UI would ignore local overlay)
 
 Do **not** translate metric names or log lines in this pass.
+
+## Injection note
+
+`apply-overlay.sh` must splice the script tag immediately before the literal `</body>` string. Netdata packs `</head><body>…</body>` on one line; line-oriented insertion before that line lands inside an earlier `<script>` and breaks `initGrid`.
