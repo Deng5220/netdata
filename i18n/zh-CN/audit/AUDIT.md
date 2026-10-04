@@ -1,26 +1,23 @@
-# Box UI audit (2026-10-04 15:29 CST)
+# Box UI audit follow-up (2026-10-04 15:33 CST)
 
-Host: this shared Linux machine, disposable Docker `netdata-zh-box` (`netdata/netdata:stable`), `127.0.0.1:19999`, overlay injected before `</body>`. Not a mirror image. Not deployed.
-
-Browser cache: a broken earlier inject had been cached by the v3 service worker. After clearing site data, `http://127.0.0.1:19999/v3/index.html?audit=7c7777a` loaded the dashboard.
+Host: shared Linux, disposable Docker `netdata-zh-box` (`netdata/netdata:stable`), `127.0.0.1:19999`. Site data cleared, then `?audit=1db772e`. Not a mirror image. Not deployed.
 
 ## Verdict
 
-Requested chrome is translated on this host. Do **not** package a mirror yet: the alerts page body and three configuration subtabs were still English in the screenshots. Those labels are now in `strings.zh-CN.json` and were not re-screenshotted.
+The English chrome called out on the previous screenshots is translated. Do **not** package until this conclusion is accepted.
 
-## Verified translated
+## Verified this pass
 
-- Nav: 本地, 节点, 指标, 实时, 日志, 仪表板, 告警, 事件, 异常, AI 洞察, 登录, 播放中/已暂停
-- Metrics chrome: 搜索图表, 分组依据, 维度, 平均值, 1 节点, 9 / 10 维度, 2 标签, 各自为, 每 4 秒, 重置
-- Config: 配置, 采集器, 健康, 任务, 搜索, 0 已选
+- Toolbar token `the` → `的` (next to 平均值)
+- Alerts: 已触发, 运行中, 配置错误, 新建告警, 此空间没有活动告警。, 稍后再看，或检查通知, 上次更新：
+- Config subtabs: 密钥存储, 服务发现, 虚拟节点 (plus 配置 / 采集器 / 健康 / 任务)
 
-## Still English in the screenshots (in scope)
+## Left in English on purpose
 
-- Alerts: Raised, Running, New Alert, Alerts & Notifications, empty-state sentences
-- Config subtabs: SecretStores, ServiceDiscovery, Vnodes
-- Split toolbar token `the` next to 平均值, and chip `1 system` (pattern exists; node may be split)
-- Chart titles, series names, and log body: unchanged on purpose
+- Toolbar chip still shows `system`. The exact phrase `1 system` did not match (the word is its own text node). Mapping bare `system` would also rename the CPU series `system`, which stays English with other metric names.
+- Dates stay in English (`Sun, Oct 04, 2026`). `GMT+8` and `15min` stay as time tokens.
+- Chart titles, series names, collector ids (`go.d`, `activemq`, …), and log body.
 
 ## Evidence
 
-- `home.png`, `metrics.png`, `alerts.png`, `configs.png`, `notes.md`
+`metrics.png`, `alerts.png`, `configs.png`, `notes.md`

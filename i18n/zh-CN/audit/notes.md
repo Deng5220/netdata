@@ -1,17 +1,15 @@
-Netdata v3 i18n audit (audit=7c7777a)
+# zh-CN overlay retest (audit=1db772e)
 
-Cache/load
-- Cleared the origin in DevTools Application > Storage with Cache storage, IndexedDB, local/session storage, service-worker unregister, and cookies selected.
-- Confirmed Application > Cache storage reported “No cache storage detected” for http://127.0.0.1:19999/.
-- Fresh exact URL loaded and redirected into the local room dashboard; top navigation was visible.
+Site data for `http://127.0.0.1:19999/` was cleared in Chrome DevTools Storage with cache storage, IndexedDB, local/session storage, cookies, and service-worker unregister selected. No welcome/sign-in splash appeared.
 
-Chinese chrome that worked
-- Main navigation: 本地, 节点, 指标, 实时, 日志, 仪表板, 告警, 事件, 异常, AI 洞察, 登录.
-- Metrics chrome: 搜索图表 (Search charts), 最新: (Latest:), 分组依据, 维度, 平均值, 1 节点, 9 / 10 维度, 2 标签, 各自为, 每 4 秒, 重置.
-- Configuration route: 配置 (Configurations), 采集器 (Collectors), 健康 (Health), 任务 (Jobs), 节点, 搜索.
+## Metrics (`metrics.png`)
 
-Still-English in-scope chrome
-- Alerts page: Raised, Running, Misconfigured tabs and New Alert button remain English.
-- Configuration subtabs remain English: SecretStores, ServiceDiscovery, Vnodes.
-- AVG()/N of M dimensions: no literal English AVG() or “N of M dimensions” was observed in the tested chart chrome; the corresponding visible labels were localized as 平均值 and 9 / 10 维度.
-- Chart titles, metric names, and log text were not inventoried (out of scope).
+The in-scope navigation and metrics-panel chrome is Chinese. The chart toolbar now shows `的` next to `平均值` (the old English token is fixed). The count still renders as `1 system` rather than `1 个系统`; `system` is the remaining English in the toolbar. The visible timestamp/date strings still use English month/day formatting (for example, `Sun, Oct 04, 2026`), and the global time UI retains technical `GMT+8`/`15min` formatting. Chart titles, metric names, units, and data values are intentionally not inventoried.
+
+## Alerts (`alerts.png`)
+
+The Raised/Running/Configuration Errors/New Alert area is translated as `已触发`, `运行中`, `配置错误`, and `新建告警`. The empty state is Chinese: `此空间没有活动告警。` and `稍后再看，或检查通知`. The remaining English visible in this view is the date portion of the last-updated timestamp, `Sun, Oct 04, 2026 15:33:18` (plus the technical `GMT+8`/`15min` global time formatting).
+
+## Configurations (`configs.png`)
+
+The configuration chrome is Chinese, including `配置`, `采集器`, `健康`, `日志`, and the requested subtabs: `密钥存储`, `服务发现`, `虚拟节点`. Collector/module identifiers such as `go.d`, `scripts.d`, `activemq`, and `apache` remain identifier names rather than UI strings and are not counted as untranslated chrome.
