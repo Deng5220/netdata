@@ -1,6 +1,6 @@
 /*
  * Netdata Agent Web UI — zh-CN runtime string overlay.
- * Dependency-free. Replaces exact trimmed text-node matches only.
+ * Dependency-free. Exact text-node and label-attribute matches, plus a few counted toolbar phrases.
  */
 (function () {
   "use strict";
@@ -78,18 +78,64 @@
     return false;
   }
 
+  var ATTRS = ["placeholder", "aria-label", "title", "aria-placeholder"];
+
+  function phraseTranslate(trimmed) {
+    if (Object.prototype.hasOwnProperty.call(map, trimmed)) {
+      var hit = map[trimmed];
+      if (typeof hit === "string" && hit !== trimmed) return hit;
+    }
+    var m;
+    // Chart toolbar counts. Numbers vary; the surrounding chrome does not.
+    m = /^(\d+)\s+of\s+(\d+)\s+dimensions$/i.exec(trimmed);
+    if (m) return m[1] + " / " + m[2] + " 个维度";
+    m = /^(\d+)\s+dimensions?$/i.exec(trimmed);
+    if (m) return m[1] + " 个维度";
+    m = /^(\d+)\s+labels?$/i.exec(trimmed);
+    if (m) return m[1] + " 个标签";
+    m = /^(\d+)\s+nodes?$/i.exec(trimmed);
+    if (m) return m[1] + " 个节点";
+    m = /^(\d+)\s+systems?$/i.exec(trimmed);
+    if (m) return m[1] + " 个系统";
+    m = /^every\s+(\d+)\s*s$/i.exec(trimmed);
+    if (m) return "每 " + m[1] + " 秒";
+    m = /^(\d+)\s+selected$/i.exec(trimmed);
+    if (m) return "已选 " + m[1] + " 项";
+    return null;
+  }
+
+  function applyTranslation(raw, translated) {
+    var lead = /^\s*/.exec(raw)[0];
+    var trail = /\s*$/.exec(raw)[0];
+    return lead + translated + trail;
+  }
+
   function translateTextNode(node) {
     var raw = node.nodeValue;
     if (!raw) return;
     var trimmed = raw.trim();
     if (!trimmed || looksLikeNumberOrUnit(trimmed)) return;
-    if (!Object.prototype.hasOwnProperty.call(map, trimmed)) return;
-    var translated = map[trimmed];
-    if (typeof translated !== "string" || translated === trimmed) return;
-    var lead = /^\s*/.exec(raw)[0];
-    var trail = /\s*$/.exec(raw)[0];
-    var next = lead + translated + trail;
+    var translated = phraseTranslate(trimmed);
+    if (translated == null) return;
+    var next = applyTranslation(raw, translated);
     if (next !== raw) node.nodeValue = next;
+  }
+
+  function translateAttrs(el) {
+    if (!el || el.nodeType !== 1 || !el.getAttribute) return;
+    if (el.hasAttribute && el.hasAttribute("data-i18n-skip")) return;
+    for (var i = 0; i < ATTRS.length; i++) {
+      var name = ATTRS[i];
+      if (!el.hasAttribute(name)) continue;
+      var raw = el.getAttribute(name);
+      if (!raw) continue;
+      var trimmed = raw.trim();
+      if (!trimmed || looksLikeNumberOrUnit(trimmed)) continue;
+      var translated = phraseTranslate(trimmed);
+      if (translated == null) continue;
+      var next = applyTranslation(raw, translated);
+      if (next !== raw) el.setAttribute(name, next);
+    }
   }
 
   function walk(root) {
@@ -99,6 +145,11 @@
       return;
     }
     if (root.nodeType !== 1 && root.nodeType !== 9 && root.nodeType !== 11) return;
+    if (root.nodeType === 1) translateAttrs(root);
+    if (root.querySelectorAll) {
+      var labeled = root.querySelectorAll("[placeholder], [aria-label], [title], [aria-placeholder]");
+      for (var a = 0; a < labeled.length; a++) translateAttrs(labeled[a]);
+    }
     if (root.nodeType === 1 && skippedElement(root)) return;
 
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
@@ -137,6 +188,8 @@
             if (m.target && m.target.nodeType === 3 && !skippedElement(m.target.parentNode)) {
               translateTextNode(m.target);
             }
+          } else if (m.type === "attributes" && m.target && m.target.nodeType === 1) {
+            translateAttrs(m.target);
           } else if (m.addedNodes && m.addedNodes.length) {
             for (var j = 0; j < m.addedNodes.length; j++) {
               walk(m.addedNodes[j]);
@@ -147,7 +200,13 @@
         applying = false;
       }
     });
-    observer.observe(target, { subtree: true, childList: true, characterData: true });
+    observer.observe(target, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ATTRS
+    });
   }
 
   function start(dict) {

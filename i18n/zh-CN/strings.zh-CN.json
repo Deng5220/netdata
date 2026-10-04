@@ -249,7 +249,7 @@
   "labels": "标签",
   "node": "节点",
   "every 4s": "每 4 秒",
-  "each as": "各自按",
+  "each as": "各自为",
   "of": "/",
   "1 node": "1 个节点",
   "1 system": "1 个系统",
@@ -259,5 +259,9 @@
   "Health": "健康",
   "Jobs": "任务",
   "0 selected": "已选 0 项",
-  "selected": "已选"
+  "selected": "已选",
+  "AVG()": "平均值",
+  "Search Charts": "搜索图表",
+  "Search charts...": "搜索图表…",
+  "label": "标签"
 }

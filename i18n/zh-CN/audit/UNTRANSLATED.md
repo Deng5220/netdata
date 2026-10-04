@@ -32,3 +32,17 @@ Scope for this pass: menus / settings / buttons / labels. **Metric names, chart 
 ## Already translated (spot-check)
 
 本地, 播放中, 最近, 实时, 登录, 节点, 指标, 日志, 仪表板, 告警, 事件, 异常, AI 洞察, 系统, 计算, 内存, 存储, 网络, 硬件, 进程, 概览, 应用, 交换分区, 磁盘, 任务, 文件描述符, 运行时间, 用户, 组, 合成, 维度, 值, 分组依据, 重置, 展开 - 对比时段, 指标关联, 显示 … 共 … 图表, 添加更多图表, 异常率 %
+
+## Follow-up mapped, box retest pending
+
+Exact map plus counted phrases in `overlay.js` (not yet re-screenshotted on this machine):
+
+- Search charts (also placeholder / aria-label / title)
+- Latest:
+- AVG() → 平均值
+- each as → 各自为
+- N of M dimensions, N dimension(s), N label(s), N node(s), N system(s), every Ns, N selected
+- Configurations / Collectors / Health / Jobs
+
+Left as English on purpose: bare token `the` (split beside AVG()), chart titles, series names, log body, GMT+8 / 15min.
+
