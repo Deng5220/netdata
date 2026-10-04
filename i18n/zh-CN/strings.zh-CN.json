@@ -275,5 +275,7 @@
   "This room has no active alerts, you are all good!": "此空间没有活动告警。",
   "Visit later or check your notifications": "稍后再看，或检查通知",
   "View raised and configured alerts across your infrastructure.": "查看基础设施中已触发和已配置的告警。",
-  "Last updated:": "上次更新："
+  "Last updated:": "上次更新：",
+  "the": "的",
+  "Last updated at:": "上次更新："
 }

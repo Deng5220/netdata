@@ -101,6 +101,12 @@
     if (m) return "每 " + m[1] + " 秒";
     m = /^(\d+)\s+selected$/i.exec(trimmed);
     if (m) return "已选 " + m[1] + " 项";
+    m = /^Last updated:\s*(.*)$/i.exec(trimmed);
+    if (m) return "上次更新：" + m[1];
+    m = /^Last updated at:\s*(.*)$/i.exec(trimmed);
+    if (m) return "上次更新：" + m[1];
+    m = /^(\d+)\s+seconds?\s+ago$/i.exec(trimmed);
+    if (m) return m[1] + " 秒前";
     return null;
   }
 
