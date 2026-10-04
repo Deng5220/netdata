@@ -240,5 +240,18 @@
   "Key": "键",
   "Debug": "调试",
   "Trace": "跟踪",
-  "Verbose": "详细"
+  "Verbose": "详细",
+  "Search charts": "搜索图表",
+  "Latest:": "最新：",
+  "Latest": "最新",
+  "dimension": "维度",
+  "dimensions": "维度",
+  "labels": "标签",
+  "node": "节点",
+  "every 4s": "每 4 秒",
+  "each as": "各自按",
+  "of": "/",
+  "1 node": "1 个节点",
+  "1 system": "1 个系统",
+  "CPU Idle Jitter": "CPU 空闲抖动"
 }

@@ -1,0 +1,213 @@
+1
+本地
+播放中
+10/4/26 • 14:58
+15:13
+GMT+8
+•
+最近
+15min
+实时
+1
+登录
+节点
+指标
+实时
+日志
+仪表板
+告警
+0
+0
+事件
+异常
+AI 洞察
+系统
+Total Disk Reads
+0
+B/s
+Total Disk Writes
+0
+B/s
+Avg CPU per Node
+%
+0.2
+0
+%
+100
+%
+Avg Used RAM per Node
+%
+3.0787
+0
+%
+100
+%
+Total Network Inbound
+0
+bit/s
+Total Network Outbound
+0
+bit/s
+Average Disk I/O Pressure (10 sec, some)
+0
+%
+Avg CPU Pressure (10 sec, full)
+0
+%
+Top Nodes by CPU
+ 
+维度
+值
+1b2ddd9312cb
+0.2
+%
+ 
+Top Nodes by Used RAM
+ 
+维度
+值
+1b2ddd9312cb
+3.0787
+%
+ 
+Avg Memory Pressure (10 sec, some)
+0
+%
+Avg System Load (1 min)
+0.09
+threads
+- Compute
+-- CPU
+Total CPU utilization
+• system.cpu
+• [percent]
+分组依据
+dimension
+the
+AVG()
+1 node
+1 system
+9 of 10 dimensions
+2 labels
+each as
+AVG()
+every 4s
+重置
+0 %
+20 %
+40 %
+60 %
+80 %
+100 %
+15:00:00
+15:02:00
+15:04:00
+15:06:00
+15:08:00
+15:10:00
+15:12:00
+Latest:
+Sun, Oct 04, 2026 • 15:13:32
+softirq
+0
+%
+user
+0.08
+%
+system
+0.1
+%
+iowait
+0
+%
+展开 - 对比时段
+-- Pressure Stall Information (PSI)
+--- CPU
+---- Some Pressure
+CPU some pressure
+• system.cpu_some_pressure
+• [percent]
+分组依据
+dimension
+the
+AVG()
+1 node
+1 system
+3 dimensions
+2 labels
+each as
+AVG()
+every 4s
+重置
+0 %
+0.2 %
+0.4 %
+0.6 %
+15:00:00
+15:05:00
+15:10:00
+Latest:
+Sun, Oct 04, 2026 • 15:13:28
+some 10
+0
+%
+some 60
+0.02
+%
+some 300
+0.06
+%
+展开 - 对比时段
+CPU some pressure stall time
+• system.cpu_some_pressure_stall_time
+• [seconds]
+分组依据
+dimension
+the
+AVG()
+1 node
+1 system
+1 dimension
+2 labels
+each as
+AVG()
+every 4s
+重置
+2 ms
+15:00:00
+15:05:00
+15:10:00
+Latest:
+Sun, Oct 04, 2026 • 15:13:28
+time
+1,000
+µs
+展开 - 对比时段
+Sun, Oct 04, 2026 • 15:13:32
+指标
+指标关联
+显示 327 共 327 图表
+添加更多图表
+异常率 %
+系统
+计算
+内存
+存储
+网络
+硬件
+进程
+概览
+应用
+CPU
+内存
+交换分区
+磁盘
+任务
+文件描述符
+运行时间
+用户
+组
+IPC
+合成
+CPU Idle Jitter
+Netdata
